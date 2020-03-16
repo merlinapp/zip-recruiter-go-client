@@ -11,6 +11,7 @@ import (
 
 const (
 	parserError = "could not parse error"
+	baseUrl     = "https://api.ziprecruiter.com/jobs/v1"
 )
 
 type ZipClient struct {
@@ -22,7 +23,7 @@ func NewZipClient() *ZipClient {
 	if len(apiKey) == 0 {
 		panic("ZIP_RECRUITER_KEY env variable not set")
 	}
-	return &ZipClient{BaseUrl: apiKey}
+	return &ZipClient{BaseUrl: baseUrl}
 }
 
 func (z *ZipClient) Get(request ZipRequest) (*ZipResponse, error) {
