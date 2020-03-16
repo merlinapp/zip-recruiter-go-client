@@ -41,7 +41,8 @@ type JobResponse struct {
 }
 
 type ZipResponse struct {
-	Succeed   bool          `json:"succeed"`
-	TotalJobs int64         `json:"total_jobs"`
-	Jobs      []JobResponse `json:"jobs"`
+	Succeed          bool          `json:"success"`
+	TotalJobs        int64         `json:"total_jobs"`
+	NumPaginableJobs int64         `json:"num_paginable_jobs"`
+	Jobs             []JobResponse `json:"jobs"`
 }
