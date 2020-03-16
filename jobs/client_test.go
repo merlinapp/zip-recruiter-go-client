@@ -40,7 +40,7 @@ func (s *zipClientSuite) TestZipClient_GetJobs_Unauthorized() {
 	zipClient := NewZipClient()
 	zipClient.BaseUrl = fmt.Sprintf("%s%s", srv.URL, "/")
 	jobs, err := zipClient.Get(ZipRequest{})
-	s.NoError(err)
+	s.Error(err)
 	s.Nil(jobs)
 }
 func (s *zipClientSuite) TestZipClient_GetJobs_Failed() {
@@ -49,7 +49,7 @@ func (s *zipClientSuite) TestZipClient_GetJobs_Failed() {
 	zipClient := NewZipClient()
 	zipClient.BaseUrl = fmt.Sprintf("%s%s", srv.URL, "/")
 	jobs, err := zipClient.Get(ZipRequest{})
-	s.NoError(err)
+	s.Error(err)
 	s.Nil(jobs)
 }
 

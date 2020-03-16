@@ -3,11 +3,11 @@ package jobs
 type ZipRequest struct {
 	Search       string
 	Location     string
-	RadiusMiles  string
-	Page         string
-	JobsPerPage  string
-	DaysAgo      string
-	RefineSalary string
+	RadiusMiles  int64
+	Page         int64
+	JobsPerPage  int64
+	DaysAgo      int64
+	RefineSalary int64
 }
 
 type HiringCompanyResponse struct {

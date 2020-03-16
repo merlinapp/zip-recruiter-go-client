@@ -29,7 +29,7 @@ func NewZipClient() *ZipClient {
 }
 
 func (z *ZipClient) Get(request ZipRequest) (*ZipResponse, error) {
-	url := fmt.Sprintf("%s?search=%s&locatiion=%s&radius_miles=%s&days_ago=%s&jobs_per_page=%s&page=%s&refined_salary=%s&api_key=%s",
+	url := fmt.Sprintf("%s?search=%s&locatiion=%s&radius_miles=%d&days_ago=%d&jobs_per_page=%d&page=%d&refined_salary=%d&api_key=%s",
 		z.BaseUrl, request.Search, request.Location, request.RadiusMiles, request.Page, request.JobsPerPage, request.DaysAgo, request.RefineSalary, z.ApiKey)
 	req, errNewRequest := http.NewRequest(http.MethodGet, url, nil)
 	if errNewRequest != nil {
