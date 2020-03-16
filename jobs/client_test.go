@@ -1,4 +1,4 @@
-package zip_recruiter_go_client
+package jobs
 
 import (
 	"fmt"
@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 )
 
@@ -17,6 +18,9 @@ type zipClientSuite struct {
 	suite.Suite
 }
 
+func (s *zipClientSuite) SetupTest() {
+	_ = os.Setenv("ZIP_RECRUITER_KEY", "A")
+}
 func TestService(t *testing.T) {
 	suite.Run(t, &zipClientSuite{})
 }
@@ -26,9 +30,8 @@ func (s *zipClientSuite) TestZipClient_GetJobs_Succeed() {
 	defer srv.Close()
 	zipClient := NewZipClient()
 	zipClient.BaseUrl = fmt.Sprintf("%s%s", srv.URL, "/")
-	jobs, status, err := zipClient.Get("", "", "", "", "", "", "", "")
+	jobs, err := zipClient.Get(ZipRequest{})
 	s.NoError(err)
-	s.Equal(http.StatusOK, status)
 	s.NotNil(jobs)
 }
 func (s *zipClientSuite) TestZipClient_GetJobs_Unauthorized() {
@@ -36,9 +39,8 @@ func (s *zipClientSuite) TestZipClient_GetJobs_Unauthorized() {
 	defer srv.Close()
 	zipClient := NewZipClient()
 	zipClient.BaseUrl = fmt.Sprintf("%s%s", srv.URL, "/")
-	jobs, status, err := zipClient.Get("", "", "", "", "", "", "", "")
+	jobs, err := zipClient.Get(ZipRequest{})
 	s.NoError(err)
-	s.Equal(http.StatusUnauthorized, status)
 	s.Nil(jobs)
 }
 func (s *zipClientSuite) TestZipClient_GetJobs_Failed() {
@@ -46,9 +48,8 @@ func (s *zipClientSuite) TestZipClient_GetJobs_Failed() {
 	defer srv.Close()
 	zipClient := NewZipClient()
 	zipClient.BaseUrl = fmt.Sprintf("%s%s", srv.URL, "/")
-	jobs, status, err := zipClient.Get("", "", "", "", "", "", "", "")
+	jobs, err := zipClient.Get(ZipRequest{})
 	s.NoError(err)
-	s.Equal(http.StatusInternalServerError, status)
 	s.Nil(jobs)
 }
 
