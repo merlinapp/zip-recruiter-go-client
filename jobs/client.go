@@ -16,6 +16,7 @@ const (
 
 type ZipClient struct {
 	BaseUrl string
+	ApiKey  string
 }
 
 func NewZipClient() *ZipClient {
@@ -23,12 +24,12 @@ func NewZipClient() *ZipClient {
 	if len(apiKey) == 0 {
 		panic("ZIP_RECRUITER_KEY env variable not set")
 	}
-	return &ZipClient{BaseUrl: baseUrl}
+	return &ZipClient{BaseUrl: baseUrl, ApiKey: apiKey}
 }
 
 func (z *ZipClient) Get(request ZipRequest) (*ZipResponse, error) {
 	url := fmt.Sprintf("%s?search=%s&locatiion=%s&radius_miles=%s&days_ago=%s&jobs_per_page=%s&page=%s&refined_salary=%s&api_key=%s",
-		z.BaseUrl, request.Search, request.Location, request.RadiusMiles, request.Page, request.JobsPerPage, request.DaysAgo, request.RefineSalary, z.BaseUrl)
+		z.BaseUrl, request.Search, request.Location, request.RadiusMiles, request.Page, request.JobsPerPage, request.DaysAgo, request.RefineSalary, z.ApiKey)
 	req, errNewRequest := http.NewRequest(http.MethodGet, url, nil)
 	if errNewRequest != nil {
 		return nil, errNewRequest
