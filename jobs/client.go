@@ -10,8 +10,9 @@ import (
 )
 
 const (
-	parserError = "could not parse error"
-	baseUrl     = "https://api.ziprecruiter.com/jobs/v1"
+	parserError        = "could not parse error"
+	unauthorizedAccess = "unauthorized access"
+	baseUrl            = "https://api.ziprecruiter.com/jobs/v1"
 )
 
 type ZipClient struct {
@@ -44,7 +45,7 @@ func (z *ZipClient) Get(request ZipRequest) (*ZipResponse, error) {
 		return nil, err
 	}
 	if res.StatusCode != 200 {
-		return nil, nil
+		return nil, errors.New(unauthorizedAccess)
 	}
 	var zipResponse ZipResponse
 	parserErr := json.Unmarshal(body, &zipResponse)
