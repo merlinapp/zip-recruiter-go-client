@@ -1,4 +1,4 @@
-package jobs
+package zip_recruiter_go_client
 
 import (
 	"fmt"
@@ -18,7 +18,7 @@ func Get(apiKey string,
 	jobsPerPage string,
 	daysAgo string,
 	refineSalary string,
-) (interface{}, int, error) {
+) ([]byte, int, error) {
 
 	url := fmt.Sprintf("%s?search=%s&locatiion=%s&radius_miles=%s&days_ago=%s&jobs_per_page=%s&page=%s&refined_salary=%s&api_key=%s",
 		baseUrl, search, location, radiusMiles, page, jobsPerPage, daysAgo, refineSalary, apiKey)
