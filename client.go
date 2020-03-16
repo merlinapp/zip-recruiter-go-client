@@ -10,7 +10,15 @@ const (
 	baseUrl = "https://api.ziprecruiter.com/jobs/v1"
 )
 
-func Get(apiKey string,
+type ZipClient struct {
+	BaseUrl string
+}
+
+func NewZipClient() *ZipClient {
+	return &ZipClient{BaseUrl: baseUrl}
+}
+
+func (z *ZipClient) Get(apiKey string,
 	search string,
 	location string,
 	radiusMiles string,
@@ -21,7 +29,7 @@ func Get(apiKey string,
 ) ([]byte, int, error) {
 
 	url := fmt.Sprintf("%s?search=%s&locatiion=%s&radius_miles=%s&days_ago=%s&jobs_per_page=%s&page=%s&refined_salary=%s&api_key=%s",
-		baseUrl, search, location, radiusMiles, page, jobsPerPage, daysAgo, refineSalary, apiKey)
+		z.BaseUrl, search, location, radiusMiles, page, jobsPerPage, daysAgo, refineSalary, apiKey)
 	req, errNewRequest := http.NewRequest(http.MethodGet, url, nil)
 	if errNewRequest != nil {
 		return nil, http.StatusInternalServerError, errNewRequest
@@ -34,6 +42,9 @@ func Get(apiKey string,
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return nil, res.StatusCode, err
+	}
+	if res.StatusCode != 200 {
+		return nil, res.StatusCode, nil
 	}
 	return body, res.StatusCode, nil
 }
