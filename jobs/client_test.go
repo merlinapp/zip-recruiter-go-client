@@ -28,9 +28,18 @@ func TestService(t *testing.T) {
 func (s *zipClientSuite) TestZipClient_GetJobs_Succeed() {
 	srv := newServerForGetSuccess()
 	defer srv.Close()
-	_ = os.Setenv("ZIP_RECRUITER_BASE_URL", fmt.Sprintf("%s%s", srv.URL, "/"))
+	url := fmt.Sprintf("%s%s", srv.URL, "/")
+	_ = os.Setenv("ZIP_RECRUITER_BASE_URL", url)
 	zipClient := NewZipClient()
-	jobs, err := zipClient.Get(ZipRequest{})
+	jobs, err := zipClient.Get(ZipRequest{
+		Search:       "cashier",
+		Location:     "Brooklyn, NY",
+		RadiusMiles:  0,
+		Page:         0,
+		JobsPerPage:  0,
+		DaysAgo:      0,
+		RefineSalary: 0,
+	})
 	s.NoError(err)
 	s.NotNil(jobs)
 }
