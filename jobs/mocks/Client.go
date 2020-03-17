@@ -11,14 +11,16 @@ type Client struct {
 }
 
 // Get provides a mock function with given fields: request
-func (_m *Client) Get(request jobs.ZipRequest) (jobs.ZipResponse, error) {
+func (_m *Client) Get(request jobs.ZipRequest) (*jobs.ZipResponse, error) {
 	ret := _m.Called(request)
 
-	var r0 jobs.ZipResponse
-	if rf, ok := ret.Get(0).(func(jobs.ZipRequest) jobs.ZipResponse); ok {
+	var r0 *jobs.ZipResponse
+	if rf, ok := ret.Get(0).(func(jobs.ZipRequest) *jobs.ZipResponse); ok {
 		r0 = rf(request)
 	} else {
-		r0 = ret.Get(0).(jobs.ZipResponse)
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*jobs.ZipResponse)
+		}
 	}
 
 	var r1 error
