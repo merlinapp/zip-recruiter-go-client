@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	urlUtils "net/url"
 	"os"
@@ -46,23 +47,28 @@ func (z *ZipClient) Get(request ZipRequest) (*ZipResponse, error) {
 		z.ApiKey)
 	req, errNewRequest := http.NewRequest(http.MethodGet, url, nil)
 	if errNewRequest != nil {
+		log.Printf("Error: %s", errNewRequest.Error())
 		return nil, errNewRequest
 	}
 	res, errCall := http.DefaultClient.Do(req)
 	if errCall != nil {
+		log.Printf("Error: %s", errCall.Error())
 		return nil, errCall
 	}
 	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
+		log.Printf("Error: %s", err.Error())
 		return nil, err
 	}
 	if res.StatusCode != 200 {
+		log.Printf("Error: %s", unauthorizedAccess)
 		return nil, errors.New(unauthorizedAccess)
 	}
 	var zipResponse ZipResponse
 	parserErr := json.Unmarshal(body, &zipResponse)
 	if parserErr != nil {
+		log.Printf("Error: %s", parserErr)
 		return nil, errors.New(parserError)
 	}
 	return &zipResponse, nil
