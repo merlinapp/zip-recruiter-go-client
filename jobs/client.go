@@ -12,7 +12,6 @@ import (
 const (
 	parserError        = "could not parse error"
 	unauthorizedAccess = "unauthorized access"
-	baseUrl            = "https://api.ziprecruiter.com/jobs/v1"
 )
 
 type ZipClient struct {
@@ -20,10 +19,14 @@ type ZipClient struct {
 	ApiKey  string
 }
 
-func NewZipClient() *ZipClient {
+func NewZipClient() Client {
 	apiKey := os.Getenv("ZIP_RECRUITER_KEY")
 	if len(apiKey) == 0 {
 		panic("ZIP_RECRUITER_KEY env variable not set")
+	}
+	baseUrl := os.Getenv("ZIP_RECRUITER_BASE_URL")
+	if len(baseUrl) == 0 {
+		panic("ZIP_RECRUITER_BASE_URL env variable not set")
 	}
 	return &ZipClient{BaseUrl: baseUrl, ApiKey: apiKey}
 }

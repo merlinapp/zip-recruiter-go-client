@@ -28,26 +28,18 @@ func TestService(t *testing.T) {
 func (s *zipClientSuite) TestZipClient_GetJobs_Succeed() {
 	srv := newServerForGetSuccess()
 	defer srv.Close()
+	_ = os.Setenv("ZIP_RECRUITER_BASE_URL", fmt.Sprintf("%s%s", srv.URL, "/"))
 	zipClient := NewZipClient()
-	zipClient.BaseUrl = fmt.Sprintf("%s%s", srv.URL, "/")
 	jobs, err := zipClient.Get(ZipRequest{})
 	s.NoError(err)
 	s.NotNil(jobs)
 }
-func (s *zipClientSuite) TestZipClient_GetJobs_Unauthorized() {
-	srv := newServerForGetUnauthorized()
-	defer srv.Close()
-	zipClient := NewZipClient()
-	zipClient.BaseUrl = fmt.Sprintf("%s%s", srv.URL, "/")
-	jobs, err := zipClient.Get(ZipRequest{})
-	s.Error(err)
-	s.Nil(jobs)
-}
+
 func (s *zipClientSuite) TestZipClient_GetJobs_Failed() {
 	srv := newServerForGetFailed500()
 	defer srv.Close()
+	_ = os.Setenv("ZIP_RECRUITER_BASE_URL", fmt.Sprintf("%s%s", srv.URL, "/"))
 	zipClient := NewZipClient()
-	zipClient.BaseUrl = fmt.Sprintf("%s%s", srv.URL, "/")
 	jobs, err := zipClient.Get(ZipRequest{})
 	s.Error(err)
 	s.Nil(jobs)
