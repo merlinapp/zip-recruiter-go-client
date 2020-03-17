@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	urlUtils "net/url"
 	"os"
 )
 
@@ -34,7 +35,7 @@ func NewZipClient() Client {
 func (z *ZipClient) Get(request ZipRequest) (*ZipResponse, error) {
 	url := fmt.Sprintf("%s?search=%s&locatiion=%s&radius_miles=%d&days_ago=%d&jobs_per_page=%d&page=%d&refined_salary=%d&api_key=%s",
 		z.BaseUrl, request.Search, request.Location, request.RadiusMiles, request.Page, request.JobsPerPage, request.DaysAgo, request.RefineSalary, z.ApiKey)
-	req, errNewRequest := http.NewRequest(http.MethodGet, url, nil)
+	req, errNewRequest := http.NewRequest(http.MethodGet, urlUtils.QueryEscape(url), nil)
 	if errNewRequest != nil {
 		return nil, errNewRequest
 	}
