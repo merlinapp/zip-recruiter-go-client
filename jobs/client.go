@@ -34,7 +34,7 @@ func NewZipClient() Client {
 
 func (z *ZipClient) Get(request ZipRequest) (*ZipResponse, error) {
 	url := fmt.Sprintf(
-		"%s?search=%s&locatiion=%s&radius_miles=%d&days_ago=%d&jobs_per_page=%d&page=%d&refined_salary=%d&api_key=%s",
+		"%s?search=%s&location=%s&radius_miles=%d&days_ago=%d&jobs_per_page=%d&page=%d&refined_salary=%d&api_key=%s",
 		z.BaseUrl,
 		urlUtils.QueryEscape(request.Search),
 		urlUtils.QueryEscape(request.Location),
