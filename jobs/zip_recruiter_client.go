@@ -1,5 +1,5 @@
 package jobs
 
 type Client interface {
-	Get(request ZipRequest) (ZipResponse, error)
+	Get(request ZipRequest) (*ZipResponse, error)
 }
