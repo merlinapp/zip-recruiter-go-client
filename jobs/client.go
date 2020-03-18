@@ -35,21 +35,10 @@ func NewZipClient() Client {
 }
 
 func (z *ZipClient) Get(request ZipRequest) (*ZipResponse, error) {
-	u, err := urlUtils.Parse(z.BaseUrl)
+	u, err := z.buildQueryParams(request)
 	if err != nil {
-		log.Printf("Error: %s", urlParseError)
-		return nil, errors.New(urlParseError)
+		return nil, err
 	}
-	queryParams := u.Query()
-	queryParams.Set("search", request.Search)
-	queryParams.Set("location", request.Location)
-	queryParams.Set("radius_miles", strconv.Itoa(int(request.RadiusMiles)))
-	queryParams.Set("days_ago", strconv.Itoa(int(request.DaysAgo)))
-	queryParams.Set("jobs_per_page", strconv.Itoa(int(request.JobsPerPage)))
-	queryParams.Set("page", strconv.Itoa(int(request.Page)))
-	queryParams.Set("refine_by_salary", strconv.Itoa(int(request.RefineSalary)))
-	queryParams.Set("api_key", z.ApiKey)
-	u.RawQuery = queryParams.Encode()
 	req, errNewRequest := http.NewRequest(http.MethodGet, u.String(), nil)
 	if errNewRequest != nil {
 		log.Printf("Error: %s", errNewRequest.Error())
@@ -77,4 +66,23 @@ func (z *ZipClient) Get(request ZipRequest) (*ZipResponse, error) {
 		return nil, errors.New(parserError)
 	}
 	return &zipResponse, nil
+}
+
+func (z *ZipClient) buildQueryParams(request ZipRequest) (*urlUtils.URL, error) {
+	u, err := urlUtils.Parse(z.BaseUrl)
+	if err != nil {
+		log.Printf("Error: %s", urlParseError)
+		return nil, errors.New(urlParseError)
+	}
+	queryParams := u.Query()
+	queryParams.Set("search", request.Search)
+	queryParams.Set("location", request.Location)
+	queryParams.Set("radius_miles", strconv.Itoa(int(request.RadiusMiles)))
+	queryParams.Set("days_ago", strconv.Itoa(int(request.DaysAgo)))
+	queryParams.Set("jobs_per_page", strconv.Itoa(int(request.JobsPerPage)))
+	queryParams.Set("page", strconv.Itoa(int(request.Page)))
+	queryParams.Set("refine_by_salary", strconv.Itoa(int(request.RefineSalary)))
+	queryParams.Set("api_key", z.ApiKey)
+	u.RawQuery = queryParams.Encode()
+	return u, err
 }

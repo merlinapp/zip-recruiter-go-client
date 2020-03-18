@@ -13,7 +13,7 @@ import (
     "github.com/merlinapp/zip-recruiter-go-client/jobs"
 )
 ```
-so in your go modules file `go.mod` you should hve the following entry:
+so in your go modules file `go.mod` you should have the following entry:
 
 ```
 require (
