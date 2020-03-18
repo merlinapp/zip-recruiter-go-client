@@ -71,10 +71,3 @@ func newServerForGetFailed500() *httptest.Server {
 		w.Write([]byte("Server Panic"))
 	}))
 }
-
-func newServerForGetUnauthorized() *httptest.Server {
-	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(401)
-		w.Write([]byte("{\"error\":\"unauthorized\"}"))
-	}))
-}
