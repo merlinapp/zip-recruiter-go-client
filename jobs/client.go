@@ -40,9 +40,9 @@ func (z *ZipClient) Get(request ZipRequest) (*ZipResponse, error) {
 		urlUtils.QueryEscape(request.Search),
 		urlUtils.QueryEscape(request.Location),
 		request.RadiusMiles,
-		request.Page,
-		request.JobsPerPage,
 		request.DaysAgo,
+		request.JobsPerPage,
+		request.Page,
 		request.RefineSalary,
 		z.ApiKey)
 	req, errNewRequest := http.NewRequest(http.MethodGet, url, nil)
