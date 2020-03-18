@@ -1,9 +1,39 @@
 {
-  "status": "succeed",
   "jobs": [
-    {},
-    {},
-    {}
+    {
+      "salary_max_annual": 56000,
+      "source": "ZipRecruiter",
+      "buyer_type": "subs_fulfillment",
+      "snippet": "Our Customer Support Representative is in charge of leading all customer service inquiries, no matter how big or small. The main responsibility will be to provide assistance to members and prospects&nbsp;...",
+      "location": "Upper West Side, NY, USA",
+      "salary_max": 56000,
+      "has_non_zr_url": "",
+      "job_age": 0,
+      "country": "US",
+      "hiring_company": {
+        "description": null,
+        "name": "Arias",
+        "url": null,
+        "id": null
+      },
+      "salary_source": "provided",
+      "industry_name": "Business",
+      "city": "Upper West Side",
+      "salary_interval": "yearly",
+      "name": "Customer Support Representative",
+      "category": "",
+      "url": "https://www.ziprecruiter.com/clk/7uubA3uJTlN1R3ANrtX0OcVX5Fc_PLTDgXNkmnW0ND6onIEvcyYRgGzTIamTbRC0F4jZlSvGco7Lmp6xCcw2UfKnQOg2jUxX-CO8VR6B3jcp8-r1EpPhC6wNsZfTAZkUGfTMa_UOFPh2rDrVQO5nHa7Q2WDvOFTqPx9GLEeqI1_xWh7B9ROUjaG7Pzw6AIN9hT88HUcLLo-54jF1zTcX68wDUirZAn0Mz_1kFbanJ2dvZAasWo1Cv7HYJ7uR707XBS1QRO4xCf9SpZG1DCCcZpN6z-OTGm5hznaoFJkII7oxgGXrngM92-91O-0SmDM04MF06j9FqTdC1IctdqgeSxzzA8qhSnmPmnbTQE7HmmHJpul_0YshajoxlVuA7ZsSmrAVnxd7oYPYX6hXIp2GTwOGns3q59Urmi74eAugVajFQabdqHWKlAgLkg6rjZrf6xZHVKhB__RxJkuu1pnWyMzz-skbm8UeWU6peOnhTHav7SLG8EeiRLXg6xQ8nQEEP5_TN8zDcwGcAy3fvxEq0gxR4fs-mxijq58ThjxHC0ooOU2dVnw5o0DYdb5Y90jS36VjhHizf-tshcj6wYiY0mXp65U8udxteElMcki6p2nTkmiIyfU_9UWeDe37qwGYM-aSNItqGwVPRpGt3psv2eJZUN0rcFlkZ3n1bN0MdPVjXL7WYmqnSptBRkOyvwzBO_PDUnyx0EFTJ4UVUlAcFw.47094ee8dffb10a1ac95dcb8b37df7e2",
+      "has_zipapply": true,
+      "id": "ziprecruiter_backfill-3f4aaf21",
+      "posted_time": "2020-03-18T12:37:24",
+      "state": "NY",
+      "salary_min_annual": 48000,
+      "last_plan_name": null,
+      "posted_time_friendly": "yesterday",
+      "salary_min": 48000
+    }
   ],
-  "": 3
+  "num_paginable_jobs": 500,
+  "success": true,
+  "total_jobs": 1224
 }
