@@ -17,7 +17,7 @@ so in your go modules file `go.mod` you should hve the following entry:
 
 ```
 require (
-    github.com/merlinapp/zip-recruiter-go-client v0.0.6
+    github.com/merlinapp/zip-recruiter-go-client <version>
 )
 ```
 ## Usage
