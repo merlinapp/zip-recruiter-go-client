@@ -10,12 +10,6 @@ import (
 	"strconv"
 )
 
-const (
-	parserError        = "could not parse error"
-	unauthorizedAccess = "unauthorized access"
-	urlParseError      = "could not parse base url"
-)
-
 type ZipClient struct {
 	BaseUrl string
 	ApiKey  string
