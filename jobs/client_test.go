@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"testing"
 )
 
@@ -18,9 +17,6 @@ type zipClientSuite struct {
 	suite.Suite
 }
 
-func (s *zipClientSuite) SetupTest() {
-	_ = os.Setenv("ZIP_RECRUITER_KEY", "A")
-}
 func TestService(t *testing.T) {
 	suite.Run(t, &zipClientSuite{})
 }
@@ -29,8 +25,7 @@ func (s *zipClientSuite) TestZipClient_GetJobs_Succeed() {
 	srv := newServerForGetSuccess()
 	defer srv.Close()
 	url := fmt.Sprintf("%s%s", srv.URL, "/")
-	_ = os.Setenv("ZIP_RECRUITER_BASE_URL", url)
-	zipClient := NewZipClient()
+	zipClient := NewZipClient(url, "key")
 	jobs, err := zipClient.Get(ZipRequest{
 		Search:       "cashier",
 		Location:     "Brooklyn, NY",
@@ -47,8 +42,8 @@ func (s *zipClientSuite) TestZipClient_GetJobs_Succeed() {
 func (s *zipClientSuite) TestZipClient_GetJobs_Failed() {
 	srv := newServerForGetFailed500()
 	defer srv.Close()
-	_ = os.Setenv("ZIP_RECRUITER_BASE_URL", fmt.Sprintf("%s%s", srv.URL, "/"))
-	zipClient := NewZipClient()
+	url := fmt.Sprintf("%s%s", srv.URL, "/")
+	zipClient := NewZipClient(url, "key")
 	jobs, err := zipClient.Get(ZipRequest{})
 	s.Error(err)
 	s.Nil(jobs)

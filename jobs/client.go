@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	urlUtils "net/url"
-	"os"
 	"strconv"
 )
 
@@ -22,14 +21,12 @@ type ZipClient struct {
 	ApiKey  string
 }
 
-func NewZipClient() Client {
-	apiKey := os.Getenv("ZIP_RECRUITER_KEY")
-	if len(apiKey) == 0 {
-		panic("ZIP_RECRUITER_KEY env variable not set")
-	}
-	baseUrl := os.Getenv("ZIP_RECRUITER_BASE_URL")
+func NewZipClient(baseUrl string, apiKey string) Client {
 	if len(baseUrl) == 0 {
-		panic("ZIP_RECRUITER_BASE_URL env variable not set")
+		panic("baseUrl variable not set")
+	}
+	if len(apiKey) == 0 {
+		panic("apiKey variable not set")
 	}
 	return &ZipClient{BaseUrl: baseUrl, ApiKey: apiKey}
 }
