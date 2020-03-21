@@ -32,10 +32,10 @@ type JobResponse struct {
 	Country            string                `json:"country"`
 	SalarySource       string                `json:"salary_source"`
 	SalaryInterval     string                `json:"salary_interval"`
-	SalaryMax          float64               `json:"salary_max"`
-	SalaryMaxAnnual    float64               `json:"salary_max_annual"`
-	SalaryMin          float64               `json:"salary_min"`
-	SalaryMinAnnual    float64               `json:"salary_min_annual"`
+	SalaryMax          int64                 `json:"salary_max"`
+	SalaryMaxAnnual    int64                 `json:"salary_max_annual"`
+	SalaryMin          int64                 `json:"salary_min"`
+	SalaryMinAnnual    int64                 `json:"salary_min_annual"`
 	IndustryName       string                `json:"industry_name"`
 	HiringCompany      HiringCompanyResponse `json:"hiring_company"`
 }
